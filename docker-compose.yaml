@@ -24,7 +24,7 @@ services:
       TZ: Asia/Yangon
 #      TZ: Asia/Rangoon
     ports:
-      - "5052:5050"
+      - "5052:80"
     depends_on:
       - postgres
     networks:
