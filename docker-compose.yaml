@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_order_db
+    environment:
+      POSTGRES_DB: order_db #pos_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Asia/Yangon
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - spring-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_order_ui
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      TZ: Asia/Yangon
+#      TZ: Asia/Rangoon
+    ports:
+      - "5052:5050"
+    depends_on:
+      - postgres
+    networks:
+      - spring-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  spring-network:
+    driver: bridge
